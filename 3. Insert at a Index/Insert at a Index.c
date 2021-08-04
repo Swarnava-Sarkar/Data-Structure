@@ -18,14 +18,11 @@ void display(struct node* str)
 struct node* insertAtIndex(struct node* head, int data,int pos)
 {
     struct node* ptr = (struct node*)malloc(sizeof(struct node));
-    struct node* p = head;
-    int i = 1;
-    while(i<pos-1)
-    {
-        p = p->next;
-        i++;
-    }
     ptr->data = data;
+
+    struct node* p = head;
+    for(int i=1 ; i<pos-1 ; i++)
+        p = p->next;
     ptr->next = p->next;
     p->next = ptr;
     return head;
@@ -58,7 +55,7 @@ int main()
     printf("The linked list is created.\n");
     display(head);
 
-    head = insertAtIndex(head,10,3);
+    head = insertAtIndex(head,60,3);
 
     printf("The node is inserted.\n");
     display(head);
