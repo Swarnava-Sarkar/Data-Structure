@@ -17,6 +17,25 @@ void display(Node* str)
     printf("\n\n");
 }
 
+void sortList(Node* head)
+{
+    Node* i;
+    Node* j;
+    int temp;
+    for(i = head ; i!=NULL ; i=i->next)
+    {
+        for(j = i->next ; j!=NULL ; j=j->next)
+        {
+            if(j->data < i->data)
+            {
+                temp = j->data;
+                j->data = i->data;
+                i->data = temp;
+            }
+        }
+    }
+}
+
 Node* creatLinkList(int n)
 {
     Node* head = NULL;
@@ -138,7 +157,8 @@ int main()
         printf("\nWhich oparation you wanna do ?\n");
         printf("\t1. Add a Node\n ");
         printf("\t2. Delete a Node\n ");
-        printf("\t3. Exit \n ");
+        printf("\t3. Sort the List\n ");
+        printf("\t4. Exit \n ");
         printf("\nChoice :: ");
         int ch1;
         scanf("%d",&ch1);
@@ -220,6 +240,12 @@ int main()
             break;
 
         case 3:
+            sortList(head);
+            printf("\n-------Updated Linked List-------\n\n");
+            display(head);
+            break;
+
+        case 4:
             exit(0);
             break;
 
