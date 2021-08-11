@@ -8,10 +8,18 @@ typedef struct node{
 
 void display(Node* str)
 {
-    while(str != NULL)
+    printf("\n");
+    if(str == NULL)
     {
-        printf("%d   ",str->data);
-        str = str->next;
+        printf("   The List is Empty !!");
+    }
+    else
+    {
+        while(str != NULL)
+        {
+            printf("   %d   ",str->data);
+            str = str->next;
+        }
     }
     printf("\n");
 }

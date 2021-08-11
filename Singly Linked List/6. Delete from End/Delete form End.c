@@ -8,11 +8,20 @@ struct node{
 
 void display(struct node* str)
 {
-    while(str != NULL)
+    printf("\n");
+    if(str == NULL)
     {
-        printf("The element is :: %d\n",str->data);
-        str = str->next;
+        printf("   The List is Empty !!");
     }
+    else
+    {
+        while(str != NULL)
+        {
+            printf("   %d   ",str->data);
+            str = str->next;
+        }
+    }
+    printf("\n");
 }
 
 struct node* deleteEnd(struct node* head)
@@ -56,6 +65,9 @@ int main()
     printf("The linked list is created.\n");
     display(head);
 
+    head = deleteEnd(head);
+    head = deleteEnd(head);
+    head = deleteEnd(head);
     head = deleteEnd(head);
 
     printf("\nThe node is Deleted.\n");
