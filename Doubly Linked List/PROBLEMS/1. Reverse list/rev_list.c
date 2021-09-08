@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node* next;
+    struct node* prev;
+}Node;
+
+void display(Node* head)
+{
+    Node* ptr = head;
+    printf("\nList is :: \n\n");
+    if(head == NULL)
+        printf("-----Empty-----");
+    else
+    {
+        while(ptr != NULL)
+        {
+            printf("\t%d",ptr->data);
+            ptr = ptr->next;
+        }
+    }
+    printf("\n");
+}
+
+Node* addToEmpty(Node* head, int data)
+{
+    Node* temp = (Node*)malloc(sizeof(Node));
+    temp->data = data;
+    temp->next = NULL;
+    temp->prev = NULL;
+    head = temp;
+    return head;
+}
+
+Node* addToEnd(Node* head, int data)
+{
+    Node* temp = (Node*)malloc(sizeof(Node));
+    temp->data = data;
+    temp->prev = NULL;
+    temp->next = NULL;
+
+    Node* ptr = head;
+    while(ptr->next != NULL)
+    {
+        ptr = ptr->next;
+    }
+    ptr->next = temp;
+    temp->prev = ptr;
+    return head;
+}
+
+Node* creatList()
+{
+    int n,d;
+    Node* head = NULL;
+    printf("\nEnter the number of Nodes :: ");
+    scanf("%d",&n);
+    if(n==0)
+        return NULL;
+    printf("\n\tEnter the no.1 Data :: ");
+    scanf("%d",&d);
+    head = addToEmpty(head,d);
+    for(int i=2; i<=n ; i++)
+    {
+        printf("\n\tEnter the no.%d Data :: ",i);
+        scanf("%d",&d);
+        head = addToEnd(head , d);
+    }
+    return head;
+}
+
+Node* revList(Node* head)
+{
+    Node* ptr1 = head;
+    Node* ptr2 = head->next;
+
+    ptr1->next = NULL;
+    ptr1->prev = ptr2;
+
+    while(ptr2 != NULL)
+    {
+        ptr2->prev = ptr2->next;
+        ptr2->next = ptr1;
+        ptr1 = ptr2;
+        ptr2 = ptr2->prev;
+    }
+
+    head = ptr1;
+    return head;
+}
+
+int main()
+{
+    Node* head = NULL;
+    head = creatList();
+    display(head);
+
+    head = revList(head);
+    printf("\n---------List is Reversed---------\n");
+    display(head);
+
+    return 0;
+}
