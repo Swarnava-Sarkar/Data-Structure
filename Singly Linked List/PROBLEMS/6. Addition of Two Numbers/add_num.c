@@ -60,6 +60,11 @@ Node* revList(Node* head)
 
 Node* addNumber(Node* head1, Node* head2)
 {
+    if(head1->data == 0)
+        return head2;
+    if(head2->data == 0)
+        return head1;
+
     Node* ptr1 = head1;
     Node* ptr2 = head2;
     Node* head3 = NULL;
@@ -69,17 +74,17 @@ Node* addNumber(Node* head1, Node* head2)
     {
         sum = 0;
         if(ptr1)
-            sum = sum + ptr1->data;
+            sum += ptr1->data;
         if(ptr2)
-            sum = sum + ptr2->data;
-        sum = sum + carry;
+            sum += ptr2->data;
+        sum += carry;
         carry = sum /10;
         sum = sum%10;
 
         head3 = addNext(head3,sum);
         if(ptr1)
             ptr1 = ptr1->next;
-        if(ptr1)
+        if(ptr2)
             ptr2 = ptr2->next;
     }
     if(carry)
@@ -92,7 +97,6 @@ int main()
     int num1,num2 ;
     Node* head1 = NULL;
     Node* head2 = NULL;
-    Node* head3 = NULL;
 
     printf("\nEnter the 1st Number :: ");
     scanf("%d",&num1);
@@ -116,6 +120,7 @@ int main()
     printf("\n2nd Number is ::");
     display(head2);
 
+    Node* head3 = NULL;
     head3 = addNumber(head1,head2);
     printf("\n-----------After Addition-----------\n");
     printf("\nThe Number is ::");
